@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:22 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/22 14:14:47 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/09/22 14:38:22 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,35 @@ int	know_dates(t_gdates *numbers, char *map)
 	return (flag);
 }
 
+int	read_map(t_values ***maptrix, t_gdates *numbers)
+{
+	int i;
+
+	i = 0;
+	*maptrix = malloc(sizeof(maptrix) * numbers->rows);
+	while (i < numbers->rows)
+	{
+		maptrix[i] = malloc(sizeof(maptrix) * numbers->columns);
+		i++;
+	}
+	return (0);
+}
+
 int	main(void)
 {
 	int			flag;
 	t_gdates	numbers;
+	t_values	**maptrix;
 	
 	ft_bzero(&numbers, sizeof(numbers));
 	flag = know_dates(&numbers, "maps/10-2.fdf");
-	if (flag == 0 && read_map())
+	if (flag == 0 && read_map(&maptrix, &numbers) == 0)
 	{
-		
+		ft_printf("Map loaded!!");
+		free(maptrix);
 	}
 	if (flag == 1)
 		ft_printf("Error!");
+	//system("leaks fdf");
 	return (0);
 }
