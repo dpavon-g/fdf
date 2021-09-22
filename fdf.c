@@ -6,36 +6,12 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:22 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/22 14:38:22 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:06:59 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
-
-// char	**read_map()
-// {
-// 	char		*string;
-// 	char		**dates;
-// 	int			length;
-// 	int			status;
-// 	int			fd;
-
-// 	fd = open("maps/10-2.fdf", O_RDONLY);
-// 	status = get_next_line(fd, &string);
-// 	dates = ft_split(string, ' ');
-// 	ft_printf("String: %s\n", string);
-
-// 	length = 0;
-// 	while (dates[length] != '\0')
-// 	{
-// 		ft_printf("%s\n", dates[length]);
-// 		length++;
-// 	}
-
-// 	free(string);
-// 	return (dates);
-// }
 
 int	number_columns(char **string)
 {
@@ -54,7 +30,7 @@ int	number_columns(char **string)
 	return (i);
 }
 
-int	know_dates(t_gdates *numbers, char *map)
+int	know_dates(t_gdates *numbers)
 {
 	int		fd;
 	int		status;
@@ -62,7 +38,7 @@ int	know_dates(t_gdates *numbers, char *map)
 	int		flag;
 
 	flag = 0;
-	fd = open(map, O_RDONLY);
+	fd = open(numbers->map, O_RDONLY);
 	status = get_next_line(fd, &string);
 	if (status >= 0)
 	{
@@ -83,17 +59,32 @@ int	know_dates(t_gdates *numbers, char *map)
 	return (flag);
 }
 
-int	read_map(t_values ***maptrix, t_gdates *numbers)
+int	charge_map(t_values **maptrix, t_gdates numbers)
 {
-	int i;
+	int	fd;
+	char *string;
+	int x;
+	char **split;
+	int	y;
 
-	i = 0;
-	*maptrix = malloc(sizeof(maptrix) * numbers->rows);
-	while (i < numbers->rows)
+	y = 0;
+	fd = open(numbers.map, O_RDONLY);
+	while (y < numbers.rows)
 	{
-		maptrix[i] = malloc(sizeof(maptrix) * numbers->columns);
-		i++;
+		x = 0;
+		get_next_line(fd, &string);
+		split = ft_split(string, ' ');
+		while (x < numbers.columns)
+		{
+			maptrix[y][x].number = ft_atoi(split[x]);
+			free(split[x]);
+			x++;
+		}
+		y++;
+		free(split);
+		free(string);
 	}
+	//ft_printf("Number: %d\n", maptrix[8][9].number);
 	return (0);
 }
 
@@ -102,16 +93,25 @@ int	main(void)
 	int			flag;
 	t_gdates	numbers;
 	t_values	**maptrix;
+	int			i;
 	
+	i = 0;
 	ft_bzero(&numbers, sizeof(numbers));
-	flag = know_dates(&numbers, "maps/10-2.fdf");
-	if (flag == 0 && read_map(&maptrix, &numbers) == 0)
+	numbers.map = "maps/10-2.fdf";
+	flag = know_dates(&numbers);
+	if (flag == 0)
 	{
-		ft_printf("Map loaded!!");
-		free(maptrix);
+		ft_printf("Map loaded!!\n");
+		maptrix = malloc(sizeof(maptrix) * numbers.rows);
+		while (i < numbers.rows)
+		{
+			maptrix[i] = malloc(sizeof(maptrix) * numbers.columns);
+			i++;
+		}
+		flag = charge_map(maptrix, numbers);
 	}
 	if (flag == 1)
-		ft_printf("Error!");
+		ft_printf("Error!\n");
 	//system("leaks fdf");
 	return (0);
 }
