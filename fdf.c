@@ -1,34 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/22 14:04:22 by dpavon-g          #+#    #+#             */
+/*   Updated: 2021/09/22 14:14:47 by dpavon-g         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <fcntl.h>
 
-char	**read_map()
+// char	**read_map()
+// {
+// 	char		*string;
+// 	char		**dates;
+// 	int			length;
+// 	int			status;
+// 	int			fd;
+
+// 	fd = open("maps/10-2.fdf", O_RDONLY);
+// 	status = get_next_line(fd, &string);
+// 	dates = ft_split(string, ' ');
+// 	ft_printf("String: %s\n", string);
+
+// 	length = 0;
+// 	while (dates[length] != '\0')
+// 	{
+// 		ft_printf("%s\n", dates[length]);
+// 		length++;
+// 	}
+
+// 	free(string);
+// 	return (dates);
+// }
+
+int	number_columns(char **string)
 {
-	char		*string;
-	char		**dates;
-	int			length;
-	int			status;
-	int			fd;
-
-	fd = open("maps/10-2.fdf", O_RDONLY);
-	status = get_next_line(fd, &string);
-	dates = ft_split(string, ' ');
-	ft_printf("String: %s\n", string);
-
-	length = 0;
-	while (dates[length] != '\0')
-	{
-		ft_printf("%s\n", dates[length]);
-		length++;
-	}
-
-	free(string);
-	return (dates);
-}
-
-int number_columns(char **string)
-{
-	int	i;
-	char **split;
+	int		i;
+	char	**split;
 
 	i = 0;
 	split = ft_split(*string, ' ');
@@ -59,8 +71,11 @@ int	know_dates(t_gdates *numbers, char *map)
 		while (status > 0)
 		{
 			status = get_next_line(fd, &string);
-			free(string);
-
+			numbers->rows++;
+			if (string[0] == '\0')
+				numbers->rows--;
+			if (number_columns(&string) != numbers->columns && status > 0)
+				flag = 1;
 		}
 	}
 	if (status < 0)
@@ -68,18 +83,18 @@ int	know_dates(t_gdates *numbers, char *map)
 	return (flag);
 }
 
-int main()
+int	main(void)
 {
-	//char	**dates;
-	t_gdates numbers;
-
+	int			flag;
+	t_gdates	numbers;
+	
 	ft_bzero(&numbers, sizeof(numbers));
-	know_dates(&numbers, "maps/10-2.fdf");
-	ft_printf("Columns: %d\n", numbers.columns);
-	//ft_printf("Filas: %d\n", numbers.rows);
-	//dates = read_map();
-	//ft_printf("%s\n", dates[0]);
-	//free(dates);
-	//system("leaks fdf");
+	flag = know_dates(&numbers, "maps/10-2.fdf");
+	if (flag == 0 && read_map())
+	{
+		
+	}
+	if (flag == 1)
+		ft_printf("Error!");
 	return (0);
 }
