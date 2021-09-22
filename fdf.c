@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:22 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/22 15:06:59 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:26:15 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	charge_map(t_values **maptrix, t_gdates numbers)
 		free(split);
 		free(string);
 	}
-	//ft_printf("Number: %d\n", maptrix[8][9].number);
+	ft_printf("Number: %d\n", maptrix[0][0].color);
 	return (0);
 }
 
