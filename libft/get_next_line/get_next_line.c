@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpavon-g <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:49:44 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/22 14:03:43 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/09/28 16:17:40 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_svreserve(char **sv, char *buf)
 	char	*aux;
 
 	if (!*sv)
-		*sv = ft_strdup(buf);
+		*sv = ft_strdup2(buf);
 	else
 	{
 		aux = *sv;
@@ -31,7 +31,7 @@ int	ft_fill(char **sv, char *buf, int BUFFER, int fd)
 	char	*aux;
 	int		status;
 
-	aux = ft_strdup(*sv);
+	aux = ft_strdup2(*sv);
 	free(*sv);
 	*sv = NULL;
 	status = read(fd, buf, BUFFER);
@@ -43,7 +43,7 @@ int	ft_fill(char **sv, char *buf, int BUFFER, int fd)
 	}
 	else if (status == 0)
 	{
-		*sv = ft_strdup(aux);
+		*sv = ft_strdup2(aux);
 		free(aux);
 	}
 	return (status);
@@ -66,19 +66,19 @@ void	ft_exit(char **sv, char ***line)
 		i++;
 	}
 	aux[i] = '\0';
-	**line = ft_strdup(aux);
+	**line = ft_strdup2(aux);
 	free(aux);
-	ptr = (ft_strchr(*sv, '\n'));
+	ptr = (ft_strchr2(*sv, '\n'));
 	ptr++;
-	aux = ft_strdup(ptr);
+	aux = ft_strdup2(ptr);
 	free(*sv);
-	*sv = ft_strdup(aux);
+	*sv = ft_strdup2(aux);
 	free(aux);
 }
 
 void	ft_null(char ***line, char **sv)
 {
-	**line = ft_strdup(*sv);
+	**line = ft_strdup2(*sv);
 	free(*sv);
 	*sv = NULL;
 }
@@ -94,13 +94,13 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	buf[status] = '\0';
 	ft_svreserve(&sv[fd], buf);
-	while (ft_strchr(sv[fd], '\n') == 0 && status != 0)
+	while (ft_strchr2(sv[fd], '\n') == 0 && status != 0)
 		status = ft_fill(&sv[fd], buf, BUFFER_SIZE, fd);
 	if (status != 0)
 		ft_exit(&sv[fd], &line);
 	else
 	{	
-		if (ft_strchr(sv[fd], '\n'))
+		if (ft_strchr2(sv[fd], '\n'))
 		{
 			ft_exit(&sv[fd], &line);
 			status = 1;
