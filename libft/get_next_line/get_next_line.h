@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpavon-g <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pavon <pavon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:03:51 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/22 14:03:53 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/09/26 18:57:44 by pavon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_fill(char **sv, char *buf, int BUFFER, int fd);
 char	*ft_strdup(const char *s1);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *str);
+char	*ft_strchr2(const char *s, int c);
+size_t	ft_strlen2(const char *str);
 
 #endif

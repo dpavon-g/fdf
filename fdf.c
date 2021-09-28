@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pavon <pavon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:22 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/22 15:26:15 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/09/27 09:57:00 by pavon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 int	number_columns(char **string)
 {
 	int		i;
-	char	**split;
+	char	**the_split;
 
 	i = 0;
-	split = ft_split(*string, ' ');
-	while (split[i] != '\0')
+	the_split = ft_split(*string, ' ');
+	while (the_split[i] != NULL)
 	{
-		free(split[i]);
+		free(the_split[i]);
 		i++;
 	}
-	free(split);
+	free(the_split);
 	free(*string);
 	return (i);
 }
@@ -59,13 +59,61 @@ int	know_dates(t_gdates *numbers)
 	return (flag);
 }
 
+int	get_number(char letter)
+{
+	if (letter >= '0' && letter <= '9')
+		return (letter - 48);
+	else if (letter == 'A')
+		return (10);
+	else if (letter == 'B')
+		return (11);
+	else if (letter == 'C')
+		return (12);
+	else if (letter == 'D')
+		return (13);
+	else if (letter == 'E')
+		return (14);
+	else if (letter == 'F')
+		return (15);
+	else
+		return (-1);
+}
+
+int	get_color(char *str)
+{
+	int	number;
+	int	len;
+	int	position;
+	int	i;
+	int	actual_number;
+	
+	position = 1;
+	number = 2;
+	len = ft_strlen(str);
+	len--;
+	while (str[len] != ',')
+	{
+		i = 0;
+		actual_number = get_number(str[len]);
+		while (position > i)
+		{
+			actual_number *= 16;
+			i++;
+		}
+		position++;
+		len--;
+	}
+	ft_printf("%d\n", actual_number);
+	return (number);
+}
+
 int	charge_map(t_values **maptrix, t_gdates numbers)
 {
-	int	fd;
-	char *string;
-	int x;
-	char **split;
-	int	y;
+	int		fd;
+	char	*string;
+	int		x;
+	char	**the_split;
+	int		y;
 
 	y = 0;
 	fd = open(numbers.map, O_RDONLY);
@@ -73,18 +121,23 @@ int	charge_map(t_values **maptrix, t_gdates numbers)
 	{
 		x = 0;
 		get_next_line(fd, &string);
-		split = ft_split(string, ' ');
+		the_split = ft_split(string, ' ');
 		while (x < numbers.columns)
 		{
-			maptrix[y][x].number = ft_atoi(split[x]);
-			free(split[x]);
+			maptrix[y][x].number = ft_atoi(the_split[x]);
+			if (ft_strchr(the_split[x], ',') != 0)
+				maptrix[y][x].color = get_color(the_split[x]);
+			else
+				maptrix[y][x].color = 16777215;
+			free(the_split[x]);
 			x++;
 		}
 		y++;
-		free(split);
+		free(the_split);
 		free(string);
 	}
-	ft_printf("Number: %d\n", maptrix[0][0].color);
+	ft_printf("Number: %d\n", maptrix[0][0].number);
+	ft_printf("Color: %d\n", maptrix[0][0].color);
 	return (0);
 }
 
@@ -94,7 +147,7 @@ int	main(void)
 	t_gdates	numbers;
 	t_values	**maptrix;
 	int			i;
-	
+
 	i = 0;
 	ft_bzero(&numbers, sizeof(numbers));
 	numbers.map = "maps/10-2.fdf";
