@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/28 17:56:32 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/09/29 10:16:30 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ typedef struct s_generics
 	int		columns;
 	char	*map;
 }	t_gdates;
+
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+}	t_vars;
+
 
 int	charge_map(t_values **maptrix, t_gdates numbers);
 int	get_color(char *str);
