@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/29 10:16:30 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/04 13:36:03 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,28 @@ typedef struct s_generics
 	char	*map;
 }	t_gdates;
 
+typedef	struct s_vector
+{
+	int x;
+	int y;
+}	t_vector;
+
+
 typedef struct s_vars
 {
-	void	*mlx;
-	void	*win;
+	void		*mlx;
+	void		*win;
+	void		*pointer;
+	char		*pixels;
+	t_vector	size;
+
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 }	t_vars;
+
 
 
 int	charge_map(t_values **maptrix, t_gdates numbers);

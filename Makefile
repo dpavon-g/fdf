@@ -6,7 +6,7 @@
 #    By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:01:15 by dpavon-g          #+#    #+#              #
-#    Updated: 2021/09/28 19:05:57 by dpavon-g         ###   ########.fr        #
+#    Updated: 2021/10/04 13:50:47 by dpavon-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ LINK = -lmlx -framework OpenGL -framework AppKit
 NAME = fdf
 
 SRCS = 	fdf.c\
-		code/charge_map.c\
 
 OBJECTS = $(SRCS:.c=.o) 
 LIB_PATH = libft/

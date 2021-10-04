@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_the_map.c                                      :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:22 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/29 10:55:06 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/04 13:44:03 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	get_the_map(void)
+void	show_map(t_values **maptrix, t_gdates numbers)
+{
+	int i;
+	int k;
+
+	i = 0;
+	while (i < numbers.columns)
+	{
+		k = 0;
+		while (k < numbers.rows)
+		{
+			ft_printf("%4d", maptrix[i][k].number);
+			k++;
+		}
+		ft_printf("\n");
+		i++;
+	}
+}
+
+int	main(void)
 {
 	int			flag;
 	t_gdates	numbers;
@@ -38,10 +57,10 @@ int	get_the_map(void)
 		ft_printf("Error!\n");
 	else
 	{
-		/*
-			Aquí tendría que ir la función encargada de realizar todo lo gráfico con la minilib
-		*/
+		show_map(maptrix, numbers);
+		
 	}
+
 	//Tienes leak porque tienes que liberar la matriz de los datos creados anteriormente.
 	return (0);
 }
