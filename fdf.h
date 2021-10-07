@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/04 13:36:03 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:29:32 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include "libft/libft.h"
 # include <fcntl.h>
+# include <math.h>
 
 typedef struct s_dates
 {
@@ -59,5 +60,6 @@ int	get_color(char *str);
 int	get_number(char letter1, char letter2);
 int	know_dates(t_gdates *numbers);
 int	number_columns(char **string);
+void start_draw(t_values **maptrix, t_gdates numbers);
 
 #endif
