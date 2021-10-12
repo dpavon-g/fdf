@@ -5,73 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/22 14:04:22 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/07 18:57:47 by dpavon-g         ###   ########.fr       */
+/*   Created: 2021/10/08 11:42:08 by dpavon-g          #+#    #+#             */
+/*   Updated: 2021/10/12 13:41:28 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	show_map(t_values **maptrix, t_gdates numbers)
+void	select_map(t_gdates *dates)
 {
-	int i;
-	int k;
+	char	*string;
+	char	*aux;
 
-	i = 0;
-	//ft_printf("Columnas: %d\n", numbers.columns);
-	//ft_printf("Filas: %d\n", numbers.rows);
-	while (i < numbers.rows)
-	{
-		k = 0;
-		while (k < numbers.columns)
-		{
-			ft_printf("%4d", maptrix[i][k].number);
-			k++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-	(void)maptrix;
+	get_next_line(0, &string);
+	aux = string;
+	string = ft_strjoin(string, ".fdf");
+	free(aux);
+	dates->map = ft_strjoin("maps/", string);
+	free(string);
 }
 
-void leaks()
+void	liberate_map(t_values ***maptrix, t_gdates *dates)
 {
-	system("leaks fdf");
+	int	i;
+
+	i = 0;
+	while (i < dates->rows)
+	{
+		free((*maptrix)[i]);
+		i++;
+	}
+	free(*maptrix);
+	free(dates->map);
 }
 
 int	main(void)
 {
-	int			flag;
-	t_gdates	numbers;
-	t_values	**maptrix;
 	int			i;
-	// Esto es lo que voy a usar para abrir la ventana gráfica.
-	
-	//atexit(leaks);
-	i = 0;
-	ft_bzero(&numbers, sizeof(numbers));
-	numbers.map = "maps/10-2.fdf";
-	flag = know_dates(&numbers);
-	if (flag == 0)
+	t_gdates	dates;
+	t_values	**maptrix;
+
+	ft_bzero(&dates, sizeof(dates));
+	select_map(&dates);
+	if (know_dates(&dates) == 0)
 	{
-		ft_printf("Map loaded!!\n");
-		maptrix = malloc(sizeof(maptrix) * numbers.rows);
-		while (i < numbers.rows)
+		i = 0;
+		maptrix = malloc(sizeof(maptrix) * dates.rows);
+		while (i < dates.rows)
+			maptrix[i++] = malloc(sizeof(maptrix) * dates.columns);
+		if (charge_map(maptrix, dates) == 0)
 		{
-			maptrix[i] = malloc(sizeof(maptrix) * numbers.columns);
-			i++;
+			ft_printf("Columnas: %d\n", dates.columns);
+			ft_printf("Filas: %d\n", dates.rows);
 		}
-		flag = charge_map(maptrix, numbers);
+		else
+			ft_printf("Error!");
+		liberate_map(&maptrix, &dates);
+		return (0);
 	}
-	if (flag == 1)
-		ft_printf("Error!\n");
-	else
-	{
-		ft_printf("Columnas: %d\n", numbers.columns);
-		ft_printf("Filas: %d\n", numbers.rows);
-		//ft_printf("Hola");
-		//show_map(maptrix, numbers);
-		start_draw(maptrix, numbers);
-	}
+	ft_printf("Error!");
 	return (0);
 }

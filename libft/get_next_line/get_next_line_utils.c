@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:10:13 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/28 16:17:12 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:55:43 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen2(const char *str)
 	return (i);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memcpy2(void *dst, const void *src, size_t n)
 {
 	char			*destino;
 	const char		*source;
@@ -50,10 +50,10 @@ char	*ft_strdup2(const char *s1)
 	ptr = (char *)malloc(len * (sizeof(char)));
 	if (ptr == NULL)
 		return (NULL);
-	return (ft_memcpy(ptr, s1, len));
+	return (ft_memcpy2(ptr, s1, len));
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin2(char const *s1, char const *s2)
 {
 	char	*ptr;
 	int		s1len;
@@ -64,8 +64,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s1len = ft_strlen2((char *)s1);
 	if (ptr)
 	{
-		ft_memcpy(ptr, s1, s1len);
-		ft_memcpy(ptr + s1len, s2, ft_strlen2((char *)s2) + 1);
+		ft_memcpy2(ptr, s1, s1len);
+		ft_memcpy2(ptr + s1len, s2, ft_strlen2((char *)s2) + 1);
 	}
 	return (ptr);
 }

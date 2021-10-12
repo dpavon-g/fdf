@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:03:51 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/28 16:17:07 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:55:07 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 int		get_next_line(int fd, char **line);
 int		ft_fill(char **sv, char *buf, int BUFFER, int fd);
 char	*ft_strdup2(const char *s1);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_memcpy2(void *dst, const void *src, size_t n);
+char	*ft_strjoin2(char const *s1, char const *s2);
 char	*ft_strchr2(const char *s, int c);
 size_t	ft_strlen2(const char *str);
 

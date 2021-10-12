@@ -6,15 +6,11 @@
 #    By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:01:15 by dpavon-g          #+#    #+#              #
-#    Updated: 2021/09/22 10:26:50 by dpavon-g         ###   ########.fr        #
+#    Updated: 2021/10/08 12:16:57 by dpavon-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-
-CFLAGS = -Wall -Wextra -Werror
-
-CC = cc
 
 SRCS = 		ft_bzero.c\
 			ft_memccpy.c\
@@ -78,14 +74,9 @@ $(NAME): $(OBJS)
 
 clean:
 			@rm -rf $(OBJS)
-			@rm -rf $(BONUSO)
 
 fclean:		clean
 			@rm -rf $(NAME)
-			@rm -rf $(BONUSO)
-
-bonus: 	$(NAME) $(BONUSO)
-		@ar rcs $(NAME) $(BONUSO)
 
 re: fclean all
 

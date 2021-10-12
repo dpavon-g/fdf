@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 18:49:44 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/09/28 16:17:40 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:55:22 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_svreserve(char **sv, char *buf)
 	else
 	{
 		aux = *sv;
-		*sv = ft_strjoin(*sv, buf);
+		*sv = ft_strjoin2(*sv, buf);
 		free(aux);
 	}
 }
@@ -38,7 +38,7 @@ int	ft_fill(char **sv, char *buf, int BUFFER, int fd)
 	buf[status] = '\0';
 	if (status != 0)
 	{
-		*sv = ft_strjoin(aux, buf);
+		*sv = ft_strjoin2(aux, buf);
 		free(aux);
 	}
 	else if (status == 0)
