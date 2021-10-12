@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 11:42:08 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/12 13:41:28 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/12 15:32:54 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(void)
 		{
 			ft_printf("Columnas: %d\n", dates.columns);
 			ft_printf("Filas: %d\n", dates.rows);
+			start_draw(maptrix, dates);
 		}
 		else
 			ft_printf("Error!");

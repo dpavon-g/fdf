@@ -52,6 +52,7 @@ void	write_algorithm(t_vars *mlx, int x0, int y0, int x1, int y1, t_values **map
 	int incXr;
 	int	incYr;
 	int	aux;
+	
 	if (dy >= 0)
 		incYi = 1;
 	else
@@ -79,6 +80,9 @@ void	write_algorithm(t_vars *mlx, int x0, int y0, int x1, int y1, t_values **map
 		dx = dy;
 		dy = aux;
 	}
+
+
+
 	int	avR = 2 * dy;
 	int av = avR - dx;
 	int avI = av - dx;
