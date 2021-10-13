@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/12 17:28:31 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/13 15:42:28 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ typedef struct s_algorithm
 	int	av_i;
 	int	aux;
 	int	increment;
+	int	rows;
+	int	columns;
+	int pos_row;
+	int	pos_col;
 }	t_bresenham;
 
 

@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:22:03 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/12 17:39:40 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:58:43 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ int	esc_hook(int key, void *param)
 
 void	calculate(int *x, int *y, int z)
 {	
-	*x = (*x - *y) * cos(0.8);
-	*y = (*x + *y) * sin(0.8) - z;
+	*x = (*x - *y) * cos(-0.8);
+	*y = (*x + *y) * sin(-0.8) - z;
 }
 
 void	initialize_dates(t_values **maptrix, t_bresenham *dates)
 {
+	dates->increment = -10;
 	dates->z0 = maptrix[dates->x0][dates->y0].number;
 	dates->z1 = maptrix[dates->x1][dates->y1].number;
-	dates->increment = 10;
 	dates->x0 *= dates->increment;
 	dates->y0 *= dates->increment;
 	dates->x1 *= dates->increment;
@@ -101,9 +101,9 @@ void	write_algorithm(t_values **maptrix, t_vars *mlx, t_bresenham *n)
 	n->av_r = 2 * n->dy;
 	n->av = n->av_r - n->dx;
 	n->av_i = n->av - n->dx;
-	n->x0 = n->x0 + 500;
-	n->y0 = n->y0 + 250;
-	while (n->x0 != n->x1 + 500 || n->y0 != n->y1 + 250)
+	n->x0 = n->x0 + 750;
+	n->y0 = n->y0 + 500;
+	while (n->x0 != n->x1 + 750 || n->y0 != n->y1 + 500)
 	{
 		if ((n->x0 >= 0 && n->x0 <= 1500) && (n->y0 >= 0 && n->y0 <= 1500))
 			my_mlx_pixel_put(mlx, n->x0, n->y0, 0x00FFFFFF);
@@ -120,7 +120,35 @@ void	write_algorithm(t_values **maptrix, t_vars *mlx, t_bresenham *n)
 			n->av = n->av + n->av_r;
 		}
 	}
-	(void)mlx;
+}
+
+void	write_map(t_values **maptrix, t_gdates num, t_vars mlx, t_bresenham *n)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < num.columns)
+	{
+		x = 0;
+		while (x < num.rows)
+		{
+			n->x0 = x;
+			n->y0 = y;
+			n->x1 = x + 1;
+			n->y1 = y;
+			if (x < num.rows - 1)
+				write_algorithm(maptrix, &mlx, n);
+			n->x0 = x;
+			n->y0 = y;
+			n->x1 = x;
+			n->y1 = y + 1;
+			if (y < num.columns - 1)
+				write_algorithm(maptrix, &mlx, n);
+			x += 1;
+		}
+		y += 1;
+	}
 }
 
 void	start_draw(t_values **maptrix, t_gdates dates)
@@ -129,6 +157,8 @@ void	start_draw(t_values **maptrix, t_gdates dates)
 	t_bresenham	n;
 
 	ft_bzero(&n, sizeof(n));
+	n.rows = dates.rows;
+	n.columns = dates.columns;
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, 1500, 1500, "fdf");
 	mlx.img = mlx_new_image(mlx.mlx, 1500, 1500);
@@ -136,11 +166,7 @@ void	start_draw(t_values **maptrix, t_gdates dates)
 	mlx_hook(mlx.win, 2, 0, esc_hook, mlx.mlx);
 	mlx.addr = mlx_get_data_addr(mlx.img, &mlx.bits_per_pixel, &mlx.line_length,
 			&mlx.endian);
-	n.x0 = 0;
-	n.y0 = 0;
-	n.x1 = 10;
-	n.y1 = 10;
-	write_algorithm(maptrix, &mlx, &n);
+	write_map(maptrix, dates, mlx, &n);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	(void)dates;
