@@ -104,11 +104,16 @@ int	get_color(char *str)
 	int	r;
 	int	g;
 	int	b;
+	char *string;
+	int num;
 
-	r = get_number(str[4], str[5]);
-	b = get_number(str[6], str[7]);
-	g = get_number(str[8], str[9]);
-	return (r << 16 | g << 8 | b);
+	string = ft_strdup(ft_strchr(str, ','));
+	r = get_number(string[3], string[4]);
+	b = get_number(string[5], string[6]);
+	g = get_number(string[7], string[8]);
+	free(string);
+	num = 0 << 24 | r << 16 | g << 8 | b;
+	return (num);
 }
 
 int	is_digit(char *str)
@@ -168,15 +173,17 @@ int	charge_map(t_values **maptrix, t_gdates dates)
 		while (x < dates.columns)
 		{
 			if (is_digit(the_split[x]) == 1)
+			{
 				maptrix[y][x].number = ft_atoi(the_split[x]);
+				maptrix[y][x].color = 16777215;
+			}
 			else if (good_value(the_split[x]) == 1)
+			{
 				maptrix[y][x].number = ft_atoi(the_split[x]);
+				maptrix[y][x].color = get_color(the_split[x]);
+			}
 			else
 				dates.flag = 1;
-			if (ft_strchr(the_split[x], ',') != 0)
-				maptrix[y][x].color = get_color(the_split[x]);
-			else
-				maptrix[y][x].color = 16777215;
 			free(the_split[x]);
 			x++;
 		}

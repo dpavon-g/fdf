@@ -6,7 +6,7 @@
 #    By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:01:15 by dpavon-g          #+#    #+#              #
-#    Updated: 2021/10/13 12:43:55 by dpavon-g         ###   ########.fr        #
+#    Updated: 2021/10/14 15:04:24 by dpavon-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,12 @@ CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@make -s -C $(LIB_PATH) 
+	@make -s -C $(LIB_PATH)
 	@$(CC) $(CFLAGS) $(LINK) $^ -L ./libft/ -l ft -o $@
 
 debug: $(OBJECTS)
-	make -C $(LIB_PATH) 
-	$(CC) $(CFLAGS) $(LINK) $(FSANITIZE) $^ -L ./libft/ -l ft -o $(NAME)
+	@make -s -C $(LIB_PATH) 
+	@$(CC) $(CFLAGS) $(LINK) $(FSANITIZE) $^ -L ./libft/ -l ft -o $(NAME)
 	
 clean:
 	@make -C $(LIB_PATH) clean

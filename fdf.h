@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/13 15:42:28 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/14 12:23:30 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef	struct s_vector
 
 typedef struct s_algorithm
 {
+	int x;
+	int y;
 	int	x0;
 	int	y0;
 	int	x1;

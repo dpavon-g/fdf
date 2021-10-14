@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:22:03 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/13 17:58:43 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/14 18:21:31 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ void	calculate(int *x, int *y, int z)
 
 void	initialize_dates(t_values **maptrix, t_bresenham *dates)
 {
-	dates->increment = -10;
-	dates->z0 = maptrix[dates->x0][dates->y0].number;
-	dates->z1 = maptrix[dates->x1][dates->y1].number;
+	dates->increment = (1000/dates->columns) * -1;
+	dates->z0 = maptrix[dates->x0][dates->y0].number * 2;
+	dates->z1 = maptrix[dates->x1][dates->y1].number * 2;
+	dates->x = dates->x0;
+	dates->y = dates->y0;
 	dates->x0 *= dates->increment;
 	dates->y0 *= dates->increment;
 	dates->x1 *= dates->increment;
@@ -94,6 +96,30 @@ void	conditions(t_bresenham *things)
 	}
 }
 
+// int	calculate_number(int dest, int orig, t_bresenham *n)
+// {
+	
+// }
+
+void	to_write(t_values **maptrix, t_vars *mlx, t_bresenham *n)
+{
+	if (maptrix[n->x][n->y].color == 16777215)
+	{
+		if (n->z1 >= 20 || n->z0 >= 20)
+		{
+			if (n->z1 >= 20 && n->z0 >= 20)
+				my_mlx_pixel_put(mlx, n->x0, n->y0, 15950335);
+			else
+				my_mlx_pixel_put(mlx, n->x0, n->y0, 15990528);
+		}
+		else
+			my_mlx_pixel_put(mlx, n->x0, n->y0, 16777215);
+	}
+	else
+		my_mlx_pixel_put(mlx, n->x0, n->y0, 16777215);
+	(void)maptrix;
+}
+
 void	write_algorithm(t_values **maptrix, t_vars *mlx, t_bresenham *n)
 {
 	initialize_dates(maptrix, n);
@@ -105,8 +131,7 @@ void	write_algorithm(t_values **maptrix, t_vars *mlx, t_bresenham *n)
 	n->y0 = n->y0 + 500;
 	while (n->x0 != n->x1 + 750 || n->y0 != n->y1 + 500)
 	{
-		if ((n->x0 >= 0 && n->x0 <= 1500) && (n->y0 >= 0 && n->y0 <= 1500))
-			my_mlx_pixel_put(mlx, n->x0, n->y0, 0x00FFFFFF);
+		to_write(maptrix, mlx, n);
 		if (n->av >= 0)
 		{
 			n->x0 = n->x0 + n->inc_x_i;
