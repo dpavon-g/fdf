@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 15:22:03 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/14 18:21:31 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/14 18:55:07 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,6 @@ void	conditions(t_bresenham *things)
 		swap(&things->dy, &things->dx);
 	}
 }
-
-// int	calculate_number(int dest, int orig, t_bresenham *n)
-// {
-	
-// }
 
 void	to_write(t_values **maptrix, t_vars *mlx, t_bresenham *n)
 {
