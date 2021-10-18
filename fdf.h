@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/14 12:23:30 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/18 11:51:45 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,39 +32,11 @@ typedef struct s_generics
 	char	*map;
 }	t_gdates;
 
-typedef	struct s_vector
+typedef struct s_vector
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }	t_vector;
-
-typedef struct s_algorithm
-{
-	int x;
-	int y;
-	int	x0;
-	int	y0;
-	int	x1;
-	int	y1;
-	int	z0;
-	int	z1;
-	int inc_y_i;
-	int inc_x_i;
-	int	inc_y_r;
-	int	inc_x_r;
-	int	dy;
-	int	dx;
-	int	av_r;
-	int av;
-	int	av_i;
-	int	aux;
-	int	increment;
-	int	rows;
-	int	columns;
-	int pos_row;
-	int	pos_col;
-}	t_bresenham;
-
 
 typedef struct s_vars
 {
@@ -80,13 +52,47 @@ typedef struct s_vars
 	int			endian;
 }	t_vars;
 
+typedef struct s_algorithm
+{
+	int			x;
+	int			y;
+	int			x0;
+	int			y0;
+	int			x1;
+	int			y1;
+	int			z0;
+	int			z1;
+	int			inc_y_i;
+	int			inc_x_i;
+	int			inc_y_r;
+	int			inc_x_r;
+	int			dy;
+	int			dx;
+	int			av_r;
+	int			av;
+	int			av_i;
+	int			aux;
+	int			increment;
+	int			rows;
+	int			columns;
+	int			pos_row;
+	int			pos_col;
+	int			position;
+	float		sen;
+	float		cos;
+	int			position_x;
+	int			position_y;
+	int			position_line;
+	t_vars		mlx;
+	t_values	**maptrix;
+	t_gdates	dates;
+}	t_bresenham;
 
-
-int	charge_map(t_values **maptrix, t_gdates dates);
-int	get_color(char *str);
-int	get_number(char letter1, char letter2);
-int	know_dates(t_gdates *numbers);
-int	number_columns(char **string);
-void start_draw(t_values **maptrix, t_gdates numbers);
+int		charge_map(t_values **maptrix, t_gdates dates);
+int		get_color(char *str);
+int		get_number(char letter1, char letter2);
+int		know_dates(t_gdates *numbers);
+int		number_columns(char **string);
+void	start_draw(t_values **maptrix, t_gdates numbers);
 
 #endif

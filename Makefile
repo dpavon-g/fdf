@@ -6,7 +6,7 @@
 #    By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/07 18:01:15 by dpavon-g          #+#    #+#              #
-#    Updated: 2021/10/14 15:04:24 by dpavon-g         ###   ########.fr        #
+#    Updated: 2021/10/15 12:29:56 by dpavon-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,4 +48,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all debug clean fclean re

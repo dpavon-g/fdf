@@ -17,39 +17,6 @@ int	number_columns(char **string)
 	return (i);
 }
 
-/*
-int	know_dates(t_gdates *numbers)
-{
-	int		fd;
-	int		status;
-	char	*string;
-	int		flag;
-
-	flag = 0;
-	fd = open(numbers->map, O_RDONLY);
-	status = get_next_line(fd, &string);
-	if (status >= 0)
-	{
-		numbers->columns = number_columns(&string);
-		numbers->rows++;
-		while (status > 0)
-		{
-			status = get_next_line(fd, &string);
-			numbers->rows++;
-			if (string[0] == '\0')
-				numbers->rows--;
-			if (number_columns(&string) != numbers->columns && status > 0)
-				flag = 1;
-		}
-	}
-	if (status < 0)
-		flag = 1;
-	if (flag == 1)
-		free(numbers->map);
-	return (flag);
-}
-*/
-
 int	know_dates(t_gdates *numbers)
 {
 	int		fd;
@@ -101,11 +68,11 @@ int	get_number(char letter1, char letter2)
 
 int	get_color(char *str)
 {
-	int	r;
-	int	g;
-	int	b;
-	char *string;
-	int num;
+	int		r;
+	int		g;
+	int		b;
+	char	*string;
+	int		num;
 
 	string = ft_strdup(ft_strchr(str, ','));
 	r = get_number(string[3], string[4]);
