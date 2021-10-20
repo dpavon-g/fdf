@@ -54,11 +54,19 @@ int	get_number(char letter1, char letter2)
 	int		num2;
 
 	i = 0;
-	string = ft_strdup("0123456789ABCDEF");
+	if (letter1 >= 'a' && letter1 <= 'f')
+		string = ft_strdup("0123456789abcdef");
+	else
+		string = ft_strdup("0123456789ABCDEF");
 	while (letter1 != string[i] && i < 16)
 		i++;
 	num1 = i;
+	free(string);
 	i = 0;
+	if (letter2 >= 'a' && letter2 <= 'f')
+		string = ft_strdup("0123456789abcdef");
+	else
+		string = ft_strdup("0123456789ABCDEF");
 	while (letter2 != string[i] && i < 16)
 		i++;
 	num2 = i;
@@ -158,5 +166,6 @@ int	charge_map(t_values **maptrix, t_gdates dates)
 		free(the_split);
 		free(string);
 	}
+	ft_printf("The color: %d\n", maptrix[0][0].color);
 	return (dates.flag);
 }

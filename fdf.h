@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/18 11:51:45 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/20 19:04:05 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_vector
 {
 	int	x;
 	int	y;
+	int	color;
 }	t_vector;
 
 typedef struct s_vars
@@ -50,43 +51,15 @@ typedef struct s_vars
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			incre;
 }	t_vars;
 
-typedef struct s_algorithm
+typedef struct s_structs
 {
-	int			x;
-	int			y;
-	int			x0;
-	int			y0;
-	int			x1;
-	int			y1;
-	int			z0;
-	int			z1;
-	int			inc_y_i;
-	int			inc_x_i;
-	int			inc_y_r;
-	int			inc_x_r;
-	int			dy;
-	int			dx;
-	int			av_r;
-	int			av;
-	int			av_i;
-	int			aux;
-	int			increment;
-	int			rows;
-	int			columns;
-	int			pos_row;
-	int			pos_col;
-	int			position;
-	float		sen;
-	float		cos;
-	int			position_x;
-	int			position_y;
-	int			position_line;
 	t_vars		mlx;
 	t_values	**maptrix;
 	t_gdates	dates;
-}	t_bresenham;
+}	t_structs;
 
 int		charge_map(t_values **maptrix, t_gdates dates);
 int		get_color(char *str);
