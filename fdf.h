@@ -6,7 +6,7 @@
 /*   By: dpavon-g <dpavon-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 14:04:14 by dpavon-g          #+#    #+#             */
-/*   Updated: 2021/10/20 19:04:05 by dpavon-g         ###   ########.fr       */
+/*   Updated: 2021/10/21 12:36:56 by dpavon-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ typedef struct s_vars
 	int			line_length;
 	int			endian;
 	int			incre;
+	t_vector	position;
+	float		cos;
+	float		sen;
+	float		height;
 }	t_vars;
 
 typedef struct s_structs

@@ -74,21 +74,40 @@ int	get_number(char letter1, char letter2)
 	return ((num1 * 16) + num2);
 }
 
+void	rgb_to_decimal(int *r, int *b, int *g, char *string)
+{
+	int		i;
+	int		l;
+	char	*str;
+
+	l = 5;
+	str = malloc(sizeof(char) * 7);
+	str[6] = '\0';
+	i = ft_strlen(string) - 1;
+	while (string[i] != 'x')
+		str[l--] = string[i--];
+	if (l > 0)
+	{
+		while (l >= 0)
+			str[l--] = '0';
+	}
+	*r = get_number(str[0], str[1]);
+	*b = get_number(str[2], str[3]);
+	*g = get_number(str[4], str[5]);
+	free(str);
+}
+
 int	get_color(char *str)
 {
 	int		r;
 	int		g;
 	int		b;
 	char	*string;
-	int		num;
 
 	string = ft_strdup(ft_strchr(str, ','));
-	r = get_number(string[3], string[4]);
-	b = get_number(string[5], string[6]);
-	g = get_number(string[7], string[8]);
+	rgb_to_decimal(&r, &b, &g, string);
 	free(string);
-	num = 0 << 24 | r << 16 | g << 8 | b;
-	return (num);
+	return (0 << 24 | r << 16 | g << 8 | b);
 }
 
 int	is_digit(char *str)
@@ -148,6 +167,7 @@ void	save_map(t_vector	coord, t_values **maptrix, t_gdates dates, int fd)
 		{
 			maptrix[coord.y][coord.x].number = ft_atoi(the_split[coord.x]);
 			maptrix[coord.y][coord.x].color = get_color(the_split[coord.x]);
+			//ft_printf("Color: %d\n", maptrix[coord.y][coord.x].color);
 		}
 		else
 			dates.flag = 1;
@@ -171,5 +191,6 @@ int	charge_map(t_values **maptrix, t_gdates dates)
 		save_map(coord, maptrix, dates, fd);
 		coord.y++;
 	}
+	//Tengo que mirar mañana la conversion de los colores porque no me está convirtiendo bien las cosas
 	return (dates.flag);
 }
